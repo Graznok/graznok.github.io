@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .faq-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(15, 52, 96, 0.06);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #E815C0;
+        }
+
+        .faq-question {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            color: #0f3460;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8fbff;
+            color: #E815C0;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5em;
+            color: #E815C0;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 15px;
+        }
+
+        .faq-question.active {
+            background: #f8fbff;
+            color: #E815C0;
+        }
+
+        .faq-question.active::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 20px;
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.9em;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 0 20px 15px 20px;
+        }
+
+        @media (max-width: 600px) {
+            .faq-container {
+                max-width: 100%;
+            }
+
+            .faq-question {
+                font-size: 0.9em;
+                padding: 12px 15px;
+            }
+
+            .faq-answer {
+                padding: 0 15px;
+                font-size: 0.85em;
+            }
+
+            .faq-answer.active {
+                padding: 0 15px 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">Kas see on tõesti täiesti tasuta?</div>
+            <div class="faq-answer">Jah, 100% tasuta. Minu eesmärk on anda sulle päris väärtust ja näidata, kuidas ma aitan ettevõtteid sisuloome ja sotsiaalmeediaga. Kui sulle meeldib see, mida ma õpetan, ja tahaksid, et ma sinu ettevõtte turundust aitan, saame tulevikus rääkida koostööst.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Kui palju aega see võtab?</div>
+            <div class="faq-answer">Kogu kursus on loodud nii, et sa saad selle läbi teha 1-2 tunniga. Video juhendid on lühikesed ja konkreetsed. Kui teed kaasa ja lood kohe oma plaani, kulub umbes 2-3 tundi. Aga juba esimese 30 minutiga saad valmis tööriistad kätte!</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Kas pean olema tehniline või AI kogemustega?</div>
+            <div class="faq-answer">Ei, absoluutselt mitte! See kursus on loodud täielikele algajatele. Näitan samm-sammult, kuidas AI tööriistu kasutada. Kui oskad arvutit kasutada ja e-posti saata, siis saad hakkama. Kõik on väga lihtsalt ja selgelt seletatud.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Millal ma juurdepääsu saan?</div>
+            <div class="faq-answer">Kohe pärast registreerumist! Saadad vormi ära ja mõne minuti jooksul jõuab sulle e-kiri kõigi materjalide ja juurdepääsulingiga. Kui kirja ei tule, kontrolli ka rämpsposti kausta.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Kas see sobib minu valdkonnale?</div>
+            <div class="faq-answer">Jah! Sisuplaneerimine toimib igal valdkonnal - olgu sa e-pood, teenusepakkuja, coach, restorani omanik või muu ettevõtja. Näitan universaalseid põhimõtteid ja annan näiteid erinevatest valdkondadest. AI teeb sisu kohandamise sinu äri jaoks väga lihtsaks.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Mis edasi pärast kursust?</div>
+            <div class="faq-answer">Pärast kursust on sul kõik tööriistad ja teadmised, et ise oma sisu planeerida. Kui aga tunned, et tahaksid professionaalset abi - et keegi teeks sisu planeerimise, loomise või kogu sotsiaalmeedia halduse sinu eest ära - siis olen siin! Kursuse lõpus annan sulle info, kuidas minuga ühendust võtta ja millised teenused ma pakun.</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        document.querySelectorAll('.faq-question').forEach(function(question) {
+            question.addEventListener('click', function() {
+                var isActive = this.classList.contains('active');
+                
+                document.querySelectorAll('.faq-question').forEach(function(q) {
+                    q.classList.remove('active');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                if (!isActive) {
+                    this.classList.add('active');
+                    this.nextElementSibling.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
