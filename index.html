@@ -4,23 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .countdown-container {
-            margin: 40px auto 50px;
-            max-width: 500px;
+            margin: 20px auto;
+            max-width: 100%;
+            padding: 0 10px;
         }
 
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 15px;
+            flex-wrap: nowrap;
         }
 
         .countdown-box {
             background: linear-gradient(135deg, #E815C0 0%, #f555d6 100%);
-            padding: 25px 30px;
+            padding: 20px 15px;
             border-radius: 15px;
             min-width: 90px;
+            max-width: 110px;
+            flex: 1;
             box-shadow: 0 8px 25px rgba(232, 21, 192, 0.4);
             border: 3px solid rgba(255, 255, 255, 0.3);
             transition: transform 0.3s ease;
@@ -40,41 +53,32 @@
         }
 
         .countdown-label {
-            font-size: 0.9em;
+            font-size: 0.75em;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 10px;
+            letter-spacing: 1px;
+            margin-top: 8px;
             color: rgba(255, 255, 255, 0.95);
             font-weight: 600;
+            white-space: nowrap;
         }
 
-        .countdown-expired {
-            font-size: 1.5em;
-            color: #5e9ceb;
-            font-weight: 700;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .countdown {
-                gap: 15px;
+                gap: 10px;
             }
-
+            
             .countdown-box {
-                min-width: 80px;
-                padding: 20px 15px;
+                min-width: 70px;
+                max-width: 85px;
+                padding: 15px 10px;
             }
 
             .countdown-number {
-                font-size: 2.5em;
+                font-size: 2em;
             }
 
             .countdown-label {
-                font-size: 0.75em;
+                font-size: 0.65em;
             }
         }
     </style>
@@ -101,31 +105,33 @@
         </div>
     </div>
 
-    <script>
-        const deadline = new Date('February 20, 2026 23:59:59').getTime();
+    <script type="text/javascript">
+        (function() {
+            var deadline = new Date('2026-02-20T23:59:59').getTime();
+            
+            function updateCountdown() {
+                var now = new Date().getTime();
+                var timeLeft = deadline - now;
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const timeLeft = deadline - now;
+                if (timeLeft <= 0) {
+                    document.getElementById('countdown').innerHTML = '<div style="font-size:1.5em;color:#5e9ceb;font-weight:700;padding:30px;text-align:center;">Pakkumine on lõppenud</div>';
+                    return;
+                }
 
-            if (timeLeft <= 0) {
-                document.getElementById('countdown').innerHTML = '<div class="countdown-expired">Pakkumine on lõppenud</div>';
-                return;
+                var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
             }
 
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }
-
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        })();
     </script>
 </body>
 </html>
